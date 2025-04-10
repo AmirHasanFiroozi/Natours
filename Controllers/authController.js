@@ -182,7 +182,6 @@ exports.restrictTo =
     next();
   };
 
-/// implementing forget pass
 /// How it work ?
 /// We send for use a link in his email
 /// The user use that to change the pass and send to us
