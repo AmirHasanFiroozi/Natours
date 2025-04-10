@@ -8,6 +8,7 @@ const cookieParser = require('cookie-parser');
 const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
+const cors = require('cors');
 
 const compression = require('compression');
 const AppError = require('./utilities/appError');
@@ -22,6 +23,19 @@ const app = express();
 /// === number 9 ===
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
+
+/// this enable cross-origin resource sharing for all incoming requests from other domains 
+app.use(cors());
+/// this sets Access-allow-origin-control header to * (means all the requests no matter where they are coming from)
+/// imagine we have our backend url aoi on api.natours.com but we want to access to the frontend in different url like natours.com
+/// we can implement this to with cors
+// app.use(cors({
+//   origin : 'https://www.natours.com'
+// }))
+/// this only works for simple requests (get and post) we have non simple request and they're (put and patch and delete and request that send cookies and send non-standard headers)
+
+app.options('*',cors());
+app.options('/api/v1/tours/:id',cors());
 
 //⁡⁢⁣⁢------------------------ENV VARIABLE------------------------⁡
 //‍‍‍ ‍‍for see all of the environment variables
@@ -106,6 +120,9 @@ app.use(compression());
 /// show the user interface
 app.use('/', viewRouter);
 // 𝗺𝗶𝗱𝗱𝗹𝗲𝘄𝗮𝗿𝗲 𝘁𝗵𝗮𝘁 𝗰𝗼𝗻𝘁𝗮𝗶𝗻𝘀 𝗼𝘂𝗿 𝗿𝗼𝘂𝘁𝗲 𝗮𝗻𝗱 𝘁𝗵𝗲 𝗳𝗶𝗹𝗲 𝘄𝗲 𝘄𝗮𝗻𝘁 𝘁𝗼 𝘀𝗲𝗲 𝗶𝗻 𝘁𝗵𝗮𝘁 𝗿𝗼𝘂𝘁𝗲
+
+/// if we want to enable cross-origin resource sharing for a specific route we can do that like this 
+// app.use('/api/v1/users', cors() , userRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/reviews', reviewsRouter);
