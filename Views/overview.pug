@@ -1,0 +1,10 @@
+extends base
+
+include _tourCard
+
+block content
+  main.main
+    .card-container
+      //- Loop inside tours in pug way
+      each tour in tours
+        +tourCard(tour)

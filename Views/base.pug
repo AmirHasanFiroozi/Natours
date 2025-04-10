@@ -1,0 +1,42 @@
+//- for let prettier to clean you pug file style :
+//- first install the npm package that prettier need
+//- 1) npm install --save-dev prettier @prettier/plugin-pug
+//- after that go to prettier config file .prettierrc and add this json code
+//- 2) 
+//-   "plugins": ["@prettier/plugin-pug"],
+//-   "overrides": [
+//-     {
+//-       "files": "*.pug",
+//-       "options": {
+//-         "parser": "pug",
+//-         "singleQuote": false,
+//-         "pugPrintWidth": 100,
+//-         "pugSingleFileComponentIndentation": true
+//-       }
+//-     }
+//-   ]
+//- the run this code in terminal ( you can add a special code for that in the package.json file )
+//- 3) npx prettier --write --plugin-search-dir=. "**/*.pug"
+
+doctype html
+html
+  head
+    block head
+      meta(charset="UTF-8")
+      meta(name="viewport", content="width=device-width, initial-scale=1.0")
+      link(rel="stylesheet", href="/css/style.css")
+      link(rel="shortcut icon", type="image/png", href="/img/favicon.png")
+      title= `Natours ${title ? `| ${title}` : ""}`
+
+  body
+    // Header
+    include _header
+
+    // Content
+    block content
+      h1 this is the placeholder text
+
+    // Footer
+    include _footer
+
+    script(src="/js/bundle.js") 
