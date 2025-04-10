@@ -22,10 +22,10 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 /// it's important to know the middlewares are executed in a row that your codes written
-app.use((req, res, next) => {
-  console.log('Hello from the middleware 👋');
-  next();
-});
+// app.use((req, res, next) => {
+//   console.log('Hello from the middleware 👋');
+//   next();
+// });
 
 app.use((req, res, next) => {
   req.requestTime = new Date().toISOString();

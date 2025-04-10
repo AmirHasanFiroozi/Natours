@@ -9,13 +9,13 @@ const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 
+const compression = require('compression');
 const AppError = require('./utilities/appError');
 const errorHandlerFunction = require('./Controllers/errorControler');
 const userRouter = require('./Routes/userRouts');
 const tourRouter = require('./Routes/tourRouts');
 const reviewsRouter = require('./Routes/reviewRouts');
 const viewRouter = require('./Routes/viewRouts');
-const compression = require('compression');
 
 const app = express();
 
@@ -44,7 +44,6 @@ if (process.env.NODE_ENV === 'development') {
 /// security middlewares
 /// === number 10 ===
 
-
 /// request limiter
 /// this means you can send 100 request with same id in one hour
 const limiter = rateLimit({
@@ -63,7 +62,7 @@ app.use('/api', limiter);
 /// A body parser that read data from the body into req.body
 app.use(express.json({ limit: '10kb' }));
 /// This line of code configures Express.js middleware to handle URL-encoded form data (like data submitted from HTML forms)
-app.use(express.urlencoded({ extended : true , limit: '10kb' }));
+app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 /// A cookie parser that parse the cookie that comes from the frontend
 app.use(cookieParser());
 
@@ -97,11 +96,11 @@ app.use(express.static(`${__dirname}/public`));
 app.use(compression());
 
 // test middleware
-app.use((req, res, next) => {
-  console.log('Hello from the middleware 👋');
-  // console.log(req.cookies);
-  next();
-});
+// app.use((req, res, next) => {
+//   console.log('Hello from the middleware 👋');
+//   // console.log(req.cookies);
+//   next();
+// });
 
 //⁡⁢⁣⁢-----------------------ROUTES------------------------⁡
 /// show the user interface

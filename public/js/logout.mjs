@@ -6,10 +6,8 @@ export const logout = async () => {
   try {
     const res = await axios({
       method: 'GET',
-      url: 'http://localhost:3000/api/v1/users/logout',
+      url: '/api/v1/users/logout',
     });
-
-    console.log(res)
 
     /// The location.reload(true) method is used in JavaScript to reload the current page
     /// What location.reload(true) Does:
