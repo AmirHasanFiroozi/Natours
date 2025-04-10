@@ -57,7 +57,7 @@ const limiter = rateLimit({
 app.use('/api', limiter);
 
 /// A middleware for set HTTP security headers
-// app.use(helmet());
+app.use(helmet());
 
 /// A body parser that read data from the body into req.body
 app.use(express.json({ limit: '10kb' }));
