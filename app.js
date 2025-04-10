@@ -15,6 +15,7 @@ const userRouter = require('./Routes/userRouts');
 const tourRouter = require('./Routes/tourRouts');
 const reviewsRouter = require('./Routes/reviewRouts');
 const viewRouter = require('./Routes/viewRouts');
+const compression = require('compression');
 
 const app = express();
 
@@ -92,6 +93,8 @@ app.use(
 
 // with this static file we access to all of the file inside the folder we link here in the URL
 app.use(express.static(`${__dirname}/public`));
+
+app.use(compression());
 
 // test middleware
 app.use((req, res, next) => {
